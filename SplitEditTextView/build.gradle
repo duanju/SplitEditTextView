@@ -1,16 +1,19 @@
-apply plugin: 'com.android.library'
+plugins {
+    id 'maven-publish'
+    id 'com.android.library'
+}
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    compileSdk rootProject.ext.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 29
+        namespace "com.al.split_edit_text_view_lib"
+        minSdk rootProject.ext.minSdkVersion
+        targetSdk rootProject.ext.targetSdkVersion
+
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
 
@@ -20,32 +23,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    // Specify Java version compatibility
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
 }
 
-apply plugin: 'com.novoda.bintray-release'
-
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.novoda:bintray-release:0.9.1'
-    }
-}
-
-publish {
-    userOrg = 'keeplearn'
-    groupId = 'com.open.keeplearn'
-    artifactId = 'SplitEditTextView'
-    publishVersion = '1.2.3'
-    desc = 'A Library Of Android UI.'
-    website = 'https://github.com/Chen-keeplearn/SplitEditTextView'
-}

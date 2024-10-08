@@ -5,14 +5,22 @@ import android.os.Bundle
 import android.widget.Toast
 import com.al.open.OnInputListener
 import com.al.open.SplitEditTextView
-import kotlinx.android.synthetic.main.activity_main.*
+import com.al.split_edit_text_view.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding  // Automatically generated binding class
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_main)
 
-        btnChangeStyle.setOnClickListener {
+        val splitEdit1 = binding.splitEdit1
+        val splitEdit2 = binding.splitEdit2
+        val splitEdit3 = binding.splitEdit3
+        val btnChangeMode  = binding.btnChangeMode
+
+        binding.btnChangeStyle.setOnClickListener {
             when (splitEdit1.inputBoxStyle) {
                 SplitEditTextView.INPUT_BOX_STYLE_SINGLE -> {
                     splitEdit1.inputBoxStyle = SplitEditTextView.INPUT_BOX_STYLE_CONNECT
